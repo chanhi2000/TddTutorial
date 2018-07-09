@@ -4,7 +4,6 @@ import net.orfjackal.nestedjunit.NestedJUnit
 import org.junit.runner.RunWith
 import org.junit.*
 
-
 @Ignore("contains no test")
 @RunWith(NestedJUnit::class)
 class FallingPiecesTest : Assert() {

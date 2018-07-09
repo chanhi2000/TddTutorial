@@ -11,8 +11,8 @@ class FallingBlocksTest : Assert() {
      * - See the README for motivation
      * - Next step: RotatingPiecesOfBlocksTest
      */
+//    private lateinit var board:Board
     private val board = Board(3, 3)
-    
     inner class NewBoard {
         @Test
         fun isEmpty() {
@@ -22,76 +22,118 @@ class FallingBlocksTest : Assert() {
                     "...\n", board.toString())
         }
 
-        //        @Test
-        //        public void has_no_falling_blocks() {
-        //            assertFalse(board.hasFalling());
-        //        }
+        @Test
+        fun hasNoFallingBlocks() {
+            assertFalse(board.hasFalling())
+        }
     }
 
-    /*
-    public class When_a_block_is_dropped {
+    inner class WhenABlockIsDropped {
         @Before
-        public void dropBlock() {
-            board.drop(new Block('X'));
+        fun dropBlock() {
+            board.drop(Block( 'X'))
         }
-        @Test
-        public void the_block_is_falling() {
-            assertTrue(board.hasFalling());
-        }
-//        @Test
-//        public void it_starts_from_the_top_middle() {
-//            assertEquals("" +
-//                    ".X.\n" +
-//                    "...\n" +
-//                    "...\n", board.toString());
-//        }
-//        @Test
-//        public void it_moves_down_one_row_per_tick() {
-//            board.tick();
-//            assertEquals("" +
-//                    "...\n" +
-//                    ".X.\n" +
-//                    "...\n", board.toString());
-//        }
-//        @Test
-//        public void at_most_one_block_may_be_falling_at_a_time() {
-//            MyAsserts.assertThrows(IllegalStateException.class, "already falling",
-//                    () -> board.drop(new Block('Y')));
-//            assertEquals("" +
-//                    ".X.\n" +
-//                    "...\n" +
-//                    "...\n", board.toString());
-//        }
-    }
-*/
 
-    /*
-    public class When_a_block_reaches_the_bottom {
-        @Before
-        public void fallToLastRow() {
-            board.drop(new Block('X'));
-            board.tick();
-            board.tick();
-        }
         @Test
-        public void it_is_still_falling_on_the_last_row() {
+        fun theBlockIsFalling() {
+            assertTrue(board.hasFalling())
+        }
+
+        @Test
+        fun itStartsFromTheTopMiddle() {
+            assertEquals("" +
+                    ".X.\n" +
+                    "...\n" +
+                    "...\n", board.toString())
+        }
+
+        @Test
+        fun itMovesDownOneRowPerTick() {
+            board.tick();
+            assertEquals("" +
+                    "...\n" +
+                    ".X.\n" +
+                    "...\n", board.toString());
+        }
+
+        @Test
+        fun atMostOneBlockMayBeFallingAtATime() {
+            val t = AssertUtils.throwException(Runnable {
+                board.drop(Block('Y'))
+            })
+            assertTrue(t is IllegalStateException)
+            assertTrue(t?.message!!.contains("already falling"))
+            assertEquals("" +
+
+                    ".X.\n" +
+                    "...\n" +
+                    "...\n", board.toString());
+        }
+    }
+
+    inner class WhenABlockReachesTheBottom {
+        @Before
+        fun fallToLastRow() {
+            board.drop(Block('X'))
+            board.tick()
+            board.tick()
+        }
+
+        @Test
+        fun itIsStillFallingOnTheLastRow() {
             assertEquals("" +
                     "...\n" +
                     "...\n" +
-                    ".X.\n", board.toString());
-            assertTrue("the player should still be able to move the block", board.hasFalling());
+                    ".X.\n", board.toString())
+            assertTrue("the player should still be able to move the block", board.hasFalling())
         }
-//        @Test
-//        public void it_stops_when_it_hits_the_bottom() {
-//            board.tick();
-//            assertEquals("" +
-//                    "...\n" +
-//                    "...\n" +
-//                    ".X.\n", board.toString());
-//            assertFalse("the block should stop moving", board.hasFalling());
-//        }
+
+        @Test
+        fun itStopsWhenItHitsTheBottom() {
+            board.tick()
+            assertEquals("" +
+                    "...\n" +
+                    "...\n" +
+                    ".X.\n", board.toString())
+            assertFalse("the block should stop moving", board.hasFalling())
+        }
     }
-*/
+
+    inner class WhenABlockLandsOnAnotherBlock {
+        @Before
+        fun landOnAnother() {
+            board.drop(Block('X'))
+            board.tick()
+            board.tick()
+            board.tick()
+            assertEquals("" +
+                    "...\n" +
+                    "...\n" +
+                    ".X.\n", board.toString())
+            assertFalse(board.hasFalling())
+            board.drop(Block('Y'))
+            board.tick()
+        }
+
+        @Test
+        fun itIsStillFallingRightAboveTheOtherBlock() {
+            assertEquals("" +
+                    "...\n" +
+                    ".Y.\n" +
+                    ".X.\n", board.toString())
+            assertTrue("the player should still be able to avoid landing on the other block", board.hasFalling())
+        }
+
+        @Test
+        fun itStopsWhenItHitsTheOtherBlock() {
+            board.tick();
+            assertEquals("" +
+                    "...\n" +
+                    ".Y.\n" +
+                    ".X.\n", board.toString())
+            assertFalse("the block should stop moving when it lands on the other block", board.hasFalling())
+        }
+    }
 
     /*
     public class When_a_block_lands_on_another_block {

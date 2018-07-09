@@ -4,7 +4,16 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.containsString
 import org.hamcrest.Matchers.instanceOf
 
-object MyAsserts {
+object AssertUtils {
+    fun throwException(r: Runnable): Throwable? {
+        try {
+            r.run()
+        } catch (t: Throwable) {
+            return t
+        }
+        throw AssertionError("expected to throw an exception, but did not")
+    }
+
     fun assertThrows(expectedException: Class<*>,
                      expectedMessage: String,
                      command: Command) {
