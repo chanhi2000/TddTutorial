@@ -4,7 +4,6 @@ import net.orfjackal.nestedjunit.NestedJUnit
 import org.junit.runner.RunWith
 import org.junit.*
 
-
 @Ignore("contains no test")
 @RunWith(NestedJUnit::class)
 class RotatingTetrominoesTest : Assert() {
@@ -15,156 +14,152 @@ class RotatingTetrominoesTest : Assert() {
      * - Next step: FallingPiecesTest
      */
 
-    /*
-    private Tetromino shape;
-    public class All_shape_instances {
+    private lateinit var shape: Tetromino
+
+    inner class AllShapeInstances {
         @Before
-        public void createAnyShape() {
-            shape = Tetromino.T_SHAPE;
+        fun createAnyShape() {
+            shape = Tetromino.T_SHAPE
         }
+
         @Test
-        public void are_immutable() {
-            String original = shape.toString();
-            shape.rotateRight();
-            assertEquals(original, shape.toString());
-            shape.rotateLeft();
-            assertEquals(original, shape.toString());
+        fun areImmutable() {
+            val original = shape.toString()
+            shape.rotateRight()
+            assertEquals(original, shape.toString())
+            shape.rotateLeft()
+            assertEquals(original, shape.toString())
         }
     }
-    */
-    /*
-    public class The_T_shape {
+
+    inner class TheShapeWith4Orientations {
         @Before
-        public void createTShape() {
-            shape = Tetromino.T_SHAPE;
+        fun createTShape() {
+            shape = Tetromino.T_SHAPE
         }
+
         @Test
-        public void is_shaped_like_T() {
+        fun shouldShape() {
             assertEquals("" +
                     ".T.\n" +
                     "TTT\n" +
-                    "...\n", shape.toString());
+                    "...\n", shape.toString())
         }
-//        @Test
-//        public void can_be_rotated_right_3_times() {
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    ".TT\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    "...\n" +
-//                    "TTT\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    "TT.\n" +
-//                    ".T.\n", shape.toString());
-//        }
-//        @Test
-//        public void can_be_rotated_left_3_times() {
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    "TT.\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    "...\n" +
-//                    "TTT\n" +
-//                    ".T.\n", shape.toString());
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    ".T.\n" +
-//                    ".TT\n" +
-//                    ".T.\n", shape.toString());
-//        }
-//        @Test
-//        public void rotating_it_4_times_will_go_back_to_the_original_shape() {
-//            String originalShape = shape.toString();
-//            shape = shape.rotateRight().rotateRight().rotateRight().rotateRight();
-//            assertEquals(originalShape, shape.toString());
-//            shape = shape.rotateLeft().rotateLeft().rotateLeft().rotateLeft();
-//            assertEquals(originalShape, shape.toString());
-//        }
-    }
-    */
-    /*
-    public class The_I_shape {
-        @Before
-        public void createIShape() {
-            shape = Tetromino.I_SHAPE;
-        }
+
         @Test
-        public void is_shaped_like_I() {
+        fun canBeRotatedRight3Times() {
+            shape = shape.rotateRight()
+            assertEquals("" +
+                    ".T.\n" +
+                    ".TT\n" +
+                    ".T.\n", shape.toString())
+            shape = shape.rotateRight()
+            assertEquals("" +
+                    "...\n" +
+                    "TTT\n" +
+                    ".T.\n", shape.toString())
+            shape = shape.rotateRight()
+            assertEquals("" +
+                    ".T.\n" +
+                    "TT.\n" +
+                    ".T.\n", shape.toString())
+        }
+
+        @Test
+        fun canBeRotatedLeft3Times() {
+            shape = shape.rotateLeft()
+            assertEquals("" +
+                    ".T.\n" +
+                    "TT.\n" +
+                    ".T.\n", shape.toString())
+            shape = shape.rotateLeft()
+            assertEquals("" +
+                    "...\n" +
+                    "TTT\n" +
+                    ".T.\n", shape.toString())
+            shape = shape.rotateLeft()
+            assertEquals("" +
+                    ".T.\n" +
+                    ".TT\n" +
+                    ".T.\n", shape.toString())
+        }
+
+        @Test
+        fun rotatingIt4Times_willGoBackToTheOriginalShape() {
+            val originalShape = shape.toString()
+            shape = shape.rotateRight().rotateRight().rotateRight().rotateRight()
+            assertEquals(originalShape, shape.toString())
+            shape = shape.rotateLeft().rotateLeft().rotateLeft().rotateLeft()
+            assertEquals(originalShape, shape.toString())
+        }
+    }
+
+    inner class TheShapeWith2Orientations {
+        @Before
+        fun createIShape() {
+            shape = Tetromino.I_SHAPE
+        }
+
+        @Test
+        fun shouldShape() {
             assertEquals("" +
                     ".....\n" +
                     ".....\n" +
                     "IIII.\n" +
                     ".....\n" +
-                    ".....\n", shape.toString());
+                    ".....\n", shape.toString())
         }
-//        @Test
-//        public void can_be_rotated_right_once() {
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    "..I..\n" +
-//                    "..I..\n" +
-//                    "..I..\n" +
-//                    "..I..\n" +
-//                    ".....\n", shape.toString());
-//        }
-//        @Test
-//        public void can_be_rotated_left_once() {
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    "..I..\n" +
-//                    "..I..\n" +
-//                    "..I..\n" +
-//                    "..I..\n" +
-//                    ".....\n", shape.toString());
-//        }
-//        @Test
-//        public void rotating_it_twice_will_get_back_to_the_original_shape() {
-//            String originalShape = shape.toString();
-//            shape = shape.rotateRight().rotateRight();
-//            assertEquals(originalShape, shape.toString());
-//            shape = shape.rotateLeft().rotateLeft();
-//            assertEquals(originalShape, shape.toString());
-//        }
-    }
-    */
-    /*
-    public class The_O_shape {
-        @Before
-        public void createOShape() {
-            shape = Tetromino.O_SHAPE;
-        }
+
         @Test
-        public void is_shaped_like_O() {
+        fun canBeRotatedRightOnce() {
+            shape = shape.rotateRight()
+            assertEquals("" +
+                    "..I..\n" +
+                    "..I..\n" +
+                    "..I..\n" +
+                    "..I..\n" +
+                    ".....\n", shape.toString())
+        }
+
+        @Test
+        fun rotatingItTwice_willGetBackToTheOriginalShape() {
+            val originalShape = shape.toString()
+            shape = shape.rotateRight().rotateRight()
+            assertEquals(originalShape, shape.toString())
+            shape = shape.rotateLeft().rotateLeft()
+            assertEquals(originalShape, shape.toString())
+        }
+    }
+
+    inner class TheShapeWith1Orientations {
+        @Before
+        fun createOShape() {
+            shape = Tetromino.O_SHAPE
+        }
+
+        @Test
+        fun shouldShape() {
             assertEquals("" +
                     ".OO\n" +
                     ".OO\n" +
-                    "...\n", shape.toString());
+                    "...\n", shape.toString())
         }
-//        @Test
-//        public void cannot_be_rotated_right() {
-//            shape = shape.rotateRight();
-//            assertEquals("" +
-//                    ".OO\n" +
-//                    ".OO\n" +
-//                    "...\n", shape.toString());
-//        }
-//        @Test
-//        public void cannot_be_rotated_left() {
-//            shape = shape.rotateLeft();
-//            assertEquals("" +
-//                    ".OO\n" +
-//                    ".OO\n" +
-//                    "...\n", shape.toString());
-//        }
+
+        @Test
+        fun cannotBeRotatedRight() {
+            shape = shape.rotateRight()
+            assertEquals("" +
+                    ".OO\n" +
+                    ".OO\n" +
+                    "...\n", shape.toString())
+        }
+        @Test
+        fun cannotBeRotatedLeft() {
+            shape = shape.rotateLeft()
+            assertEquals("" +
+                    ".OO\n" +
+                    ".OO\n" +
+                    "...\n", shape.toString())
+        }
     }
-    */
 }
