@@ -14,80 +14,80 @@ class RotatingPiecesOfBlocksTest : Assert() {
      * - Next step: RotatingTetrominoesTest
      */
 
-    /*
-    private Piece piece;
-    public class A_piece_of_3x3_blocks {
+    private lateinit var piece:Piece
+
+    inner class APieceOf3x3Blocks {
         @Before
-        public void createPiece() {
-            piece = new Piece("" +
+        fun createPiece() {
+            piece = Piece(
                     ".X.\n" +
                     ".X.\n" +
-                    "...\n");
+                    "...\n")
         }
+
         @Test
-        public void consists_of_many_blocks() {
-            assertEquals("" +
+        fun consistsOfManyBlocks() {
+            assertEquals( ".X.\n" +
                     ".X.\n" +
-                    ".X.\n" +
-                    "...\n", piece.toString());
+                    "...\n", piece.toString())
         }
-//        @Test
-//        public void can_be_rotated_right() {
-//            piece = piece.rotateRight();
-//            assertEquals("" +
-//                    "...\n" +
-//                    ".XX\n" +
-//                    "...\n", piece.toString());
-//        }
-//        @Test
-//        public void can_be_rotated_left() {
-//            piece = piece.rotateLeft();
-//            assertEquals("" +
-//                    "...\n" +
-//                    "XX.\n" +
-//                    "...\n", piece.toString());
-//        }
+
+        @Test
+        fun canBeRotatedRight() {
+            piece = piece.rotateRight()
+            assertEquals( "...\n" +
+                    ".XX\n" +
+                    "...\n", piece.toString())
+        }
+
+        @Test
+        fun canbeRotatedLeft() {
+            piece = piece.rotateLeft()
+            assertEquals(
+                    "...\n" +
+                    "XX.\n" +
+                    "...\n", piece.toString())
+        }
     }
-    */
-    /*
-    public class A_piece_of_5x5_blocks {
+
+    inner class APieceOf5x5Blocks {
         @Before
-        public void createPiece() {
-            piece = new Piece("" +
-                    "..XXX\n" +
+        fun createPiece() {
+            piece = Piece("..XXX\n" +
                     "..XX.\n" +
                     "..X..\n" +
                     ".....\n" +
-                    ".....\n");
+                    ".....\n")
         }
+
         @Test
-        public void consists_of_many_blocks() {
-            assertEquals("" +
-                    "..XXX\n" +
+        fun consistsOfManyBlocks() {
+            assertEquals("..XXX\n" +
                     "..XX.\n" +
                     "..X..\n" +
                     ".....\n" +
-                    ".....\n", piece.toString());
+                    ".....\n", piece.toString())
         }
-//        @Test
-//        public void can_be_rotated_right() {
-//            piece = piece.rotateRight();
-//            assertEquals("" +
-//                    ".....\n" +
-//                    ".....\n" +
-//                    "..XXX\n" +
-//                    "...XX\n" +
-//                    "....X\n", piece.toString());
-//        }
-//        @Test
-//        public void can_be_rotated_left() {
-//            piece = piece.rotateLeft();
-//            assertEquals("" +
-//                    "X....\n" +
-//                    "XX...\n" +
-//                    "XXX..\n" +
-//                    ".....\n" +
-//                    ".....\n", piece.toString());
-//        }
-    */
+
+        @Test
+        fun canBeRotatedRight() {
+            piece = piece.rotateRight()
+            assertEquals(".....\n" +
+                    ".....\n" +
+                    "..XXX\n" +
+                    "...XX\n" +
+                    "....X\n", piece.toString())
+        }
+
+        @Test
+        fun canBeRotatedLeft() {
+            piece = piece.rotateLeft()
+            assertEquals("" +
+                    "X....\n" +
+                    "XX...\n" +
+                    "XXX..\n" +
+                    ".....\n" +
+                    ".....\n", piece.toString())
+        }
+    }
 }

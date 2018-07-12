@@ -13,6 +13,7 @@ class FallingBlocksTest : Assert() {
      */
 //    private lateinit var board:Board
     private val board = Board(3, 3)
+
     inner class NewBoard {
         @Test
         fun isEmpty() {
@@ -126,7 +127,7 @@ class FallingBlocksTest : Assert() {
 
         @Test
         fun itStopsWhenItHitsTheOtherBlock() {
-            board.tick();
+            board.tick()
             assertEquals("" +
                     "...\n" +
                     ".Y.\n" +
@@ -134,40 +135,4 @@ class FallingBlocksTest : Assert() {
             assertFalse("the block should stop moving when it lands on the other block", board.hasFalling())
         }
     }
-
-    /*
-    public class When_a_block_lands_on_another_block {
-        @Before
-        public void landOnAnother() {
-            board.drop(new Block('X'));
-            board.tick();
-            board.tick();
-            board.tick();
-            assertEquals("" +
-                    "...\n" +
-                    "...\n" +
-                    ".X.\n", board.toString());
-            assertFalse(board.hasFalling());
-            board.drop(new Block('Y'));
-            board.tick();
-        }
-        @Test
-        public void it_is_still_falling_right_above_the_other_block() {
-            assertEquals("" +
-                    "...\n" +
-                    ".Y.\n" +
-                    ".X.\n", board.toString());
-            assertTrue("the player should still be able to avoid landing on the other block", board.hasFalling());
-        }
-//        @Test
-//        public void it_stops_when_it_hits_the_other_block() {
-//            board.tick();
-//            assertEquals("" +
-//                    "...\n" +
-//                    ".Y.\n" +
-//                    ".X.\n", board.toString());
-//            assertFalse("the block should stop moving when it lands on the other block", board.hasFalling());
-//        }
-    }
-    */
 }
